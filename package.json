@@ -10,38 +10,34 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "bootstrap-vue": "^2.0.0-rc.11",
+    "bootstrap": "^4.2.1",
+    "exports-loader": "^0.7.0",
+    "expose-loader": "^0.7.5",
     "jquery": "^3.3.1",
+    "popper.js": "^1.14.7",
     "register-service-worker": "^1.5.2",
     "vue": "^2.5.21",
-    "vue-class-component": "^6.0.0",
     "vue-popperjs": "^2.0.2",
-    "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
+    "vue-slick": "^1.1.15",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.0",
-    "@types/mocha": "^5.2.4",
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-plugin-e2e-cypress": "^3.3.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-plugin-pwa": "^3.3.0",
-    "@vue/cli-plugin-typescript": "^3.3.0",
     "@vue/cli-plugin-unit-mocha": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
     "@vue/eslint-config-prettier": "^4.0.1",
-    "@vue/eslint-config-typescript": "^3.2.0",
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-eslint": "^10.0.1",
     "chai": "^4.1.2",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "expose-loader": "^0.7.5",
     "lint-staged": "^8.1.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
-    "typescript": "~3.1.1",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
@@ -51,12 +47,11 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "@vue/prettier",
-      "@vue/typescript"
+      "@vue/prettier"
     ],
     "rules": {},
     "parserOptions": {
-      "parser": "typescript-eslint-parser"
+      "parser": "babel-eslint"
     }
   },
   "postcss": {

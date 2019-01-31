@@ -61,8 +61,18 @@
     >
   </ul>
 </template>
-<script lang="ts">
+<script>
 export default {
-  name: "Categories"
+  name: "Categories",
+  methods: {
+    cate_change: function(item) {
+      $(".category-keyword")
+        .filter(".cate-red")
+        .removeClass("cate-red");
+      $(item).addClass("cate-red");
+      var x = $(item).html();
+      $("#category-tag").html(x);
+    }
+  }
 };
 </script>

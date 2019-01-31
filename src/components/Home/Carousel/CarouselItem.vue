@@ -8,13 +8,13 @@
     </a>
   </div>
 </template>
-<script lang="ts">
+<script>
 export default {
   name: "CarouselItem",
-  props: ["resource", "description", "active", "text-class"],
+  props: ["resource", "description", "active", "text-class", "preload"],
   computed: {
     divClass() {
-      if (this.active == "true") {
+      if (this.active === "true") {
         return "carousel-item active";
       } else {
         return "carousel-item";
