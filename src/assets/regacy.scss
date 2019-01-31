@@ -1,5 +1,11 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @font-face { font-family: 'Chosunilbo_myungjo'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff'); font-weight: normal; font-style: normal; }
+@import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,700");
+@import "~slick-carousel/slick/slick.css";
+@import "~vue-popperjs/dist/vue-popper.min.css";
+@import url("https://use.fontawesome.com/releases/v5.2.0/css/all.css");
+
 a.no-uline {
     text-decoration: none;
 }
