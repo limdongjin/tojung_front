@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar bottom-bar visible-xs-flex fixed-bottom text-center bg-light align-items-center px-3"
+    class="navbar bottom-bar_home visible-xs-flex fixed-bottom text-center bg-light align-items-center px-3"
   >
     <a href="/home/brand" class="d-block text-dark icon-box fisrt-icon">
       <img
