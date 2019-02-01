@@ -61,12 +61,15 @@ export default {
     $(".cover").unwrap();
     $(".cover_img")
       .get(0)
+      .load()
       .play();
     $(".cover_img")
       .get(1)
+      .load()
       .play();
     $(".cover_img")
       .get(2)
+      .load()
       .play();
   }
 };

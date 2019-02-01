@@ -1,0 +1,40 @@
+<template>
+  <ul
+    class="nav nav-tabs justify-content-around mb-4"
+    id="myTab"
+    role="tablist"
+  >
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        id="description-tab"
+        data-toggle="tab"
+        href="#description"
+        role="tab"
+        aria-controls="description"
+        aria-selected="true"
+        >상세설명</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="timeline-tab"
+        data-toggle="tab"
+        href="#timeline"
+        role="tab"
+        aria-controls="timeline"
+        aria-selected="false"
+        >타임라인</a
+      >
+    </li>
+  </ul>
+</template>
+
+<script>
+export default {
+  name: "ProductNav"
+};
+</script>
+
+<style scoped></style>

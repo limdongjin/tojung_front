@@ -13,6 +13,9 @@ import "expose-loader?$!expose-loader?jQuery!jquery";
 import "slick-carousel/slick/slick.min.js";
 import "vue-popperjs/dist/vue-popper.min.js";
 import "@/assets/regacy.scss";
+import VueProgressiveImage from 'vue-progressive-image'
+
+Vue.use(VueProgressiveImage)
 
 // global.$ = $;
 Vue.config.productionTip = false;

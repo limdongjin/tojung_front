@@ -5,6 +5,7 @@ import Policy from "@/views/Policy";
 import Privacy from "@/views/Privacy";
 import Brand from "@/views/Brand";
 import Search from "@/views/Search";
+import Product from "@/views/Product";
 
 Vue.use(Router);
 
@@ -45,6 +46,11 @@ export default new Router({
       path: "/home/search",
       name: "search",
       component: Search
+    },
+    {
+      path: "/product/:id",
+      name: "product",
+      component: Product
     }
   ]
 });

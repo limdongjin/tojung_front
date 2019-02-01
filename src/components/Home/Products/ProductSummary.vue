@@ -1,7 +1,9 @@
 <template>
   <a :href="link" class="d-block h-100">
-    <img
+    <progressive-img
       :src="product.image"
+      :placeholder="product.image"
+      :blur="30"
       class="pro-thumbimg"
       alt="image"
       width="306"
