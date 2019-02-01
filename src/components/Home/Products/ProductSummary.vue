@@ -8,8 +8,16 @@
       alt="image"
       width="306"
       height="306"
+      v-if="!mobile"
     />
-
+    <img
+            :src="product.image"
+            class="pro-thumbimg"
+            alt="image"
+            width="306"
+            height="306"
+            v-if="mobile"
+    />
     <div class="card-body visible-lg-only font-14" style="padding: 14px 0;">
       <div class="d-flex justify-content-between align-items-center">
         <h5 class="card-title text-black font-weight-bold mb-0 font-18">
@@ -35,7 +43,7 @@
 <script>
 export default {
   name: "ProductSummary",
-  props: ["product"],
+  props: ["product", "mobile"],
   computed: {
     link() {
       return `/product/${this.product.id}`;
