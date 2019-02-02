@@ -8,7 +8,7 @@
     <h4 class="text-center font-16 mb-4">
       <span class="petit-num">
         <!--<%= @maker_responses.sum(&:send_count) %> -->
-        1123 </span
+        1123 구현중 </span
       >청원
     </h4>
     <div
@@ -29,7 +29,9 @@
         <div
           class="col-4 col-md-2 maker_card text-white font-weight-bold"
           v-for="maker_response in maker_responses"
-          v-bind:style="{ backgroundImage: makerResponseBackgroundImage(maker_response)}"
+          v-bind:style="{
+            backgroundImage: makerResponseBackgroundImage(maker_response)
+          }"
         >
           <a :href="maker_url(maker_response)" class="d-block text-white h-100">
             <div
@@ -86,7 +88,7 @@ export default {
   name: "ProductTimelines",
   props: ["timelines", "maker_responses"],
   methods: {
-    // background-image: url(<%= maker_response.maker.image0 %>);
+    // background-image0: url(<%= maker_response.maker.image0 %>);
     makerResponseBackgroundImage: function(maker_response) {
       return `url(${maker_response.maker.image0});`;
     },

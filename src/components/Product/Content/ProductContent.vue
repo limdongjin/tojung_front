@@ -1,6 +1,5 @@
 <template>
   <div class="tab-content" id="myTabContent">
-    <!--<%=render 'description', collection: @product, cached: true %>-->
     <ProductDescription :product="product" />
     <ProductTimelines
       :timelines="product.product_timelines"
@@ -10,8 +9,8 @@
 </template>
 
 <script>
-import ProductDescription from "@/components/Product/ProductDescription";
-import ProductTimelines from "@/components/Product/ProductTimelines";
+import ProductDescription from "@/components/Product/Content/Description/ProductDescription";
+import ProductTimelines from "@/components/Product/Content/ProductTimelines";
 
 export default {
   name: "ProductContent",

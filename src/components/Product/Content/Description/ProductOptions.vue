@@ -8,19 +8,14 @@
       >
         <div class="pro-card">
           <progressive-img
-            src="https://d1eq7v76s8dt2n.cloudfront.net/email.png"
-            placeholder="https://d1eq7v76s8dt2n.cloudfront.net/email.png"
-            class="w-100"
-          ></progressive-img>
-          <progressive-img
-            :src="product_option.image"
-            :placeholder="product_option.image"
+            :src="product_option.image0"
+            :placeholder="product_option.image0"
             class="desc-pro-img"
           ></progressive-img>
           <div class="card-body2 py-4 text-center">
-            <h4 class="pro-num mb-2"><%= product_option.name %></h4>
+            <h4 class="pro-num mb-2">{{ product_option.name }}</h4>
             <p class="font-grey font-12 mb-4">
-              {{ packageNamesStr }}패키지에 포함
+              {{ packageNamesStr(product_option) }}패키지에 포함
             </p>
             <pre class="font-14 font-weight-bold mb-2">
               <!--<%= product_option.content.gsub("\r\n", "<br/>").html_safe %> -->
@@ -49,13 +44,11 @@ export default {
   methods: {
     product_option_url: function(product_option) {
       return `/product_option/${product_option.id}`;
-    }
-  },
-  computed: {
-    packageNamesStr: function() {
+    },
+    packageNamesStr: function(product_option) {
       let res = "";
-      if(this.product_names === undefined) return res
-      this.product_option.package_names.forEach(name => {
+      if (product_option.package_names === undefined) return res;
+      product_option.package_names.forEach(name => {
         res += name + " ";
       });
       return res;

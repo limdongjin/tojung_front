@@ -12,8 +12,6 @@
 <script>
 export default {
   name: "YoutubeIframe",
-  props: {
-    youtubeUrl: {}
-  }
+  props: ["youtubeUrl"]
 };
 </script>

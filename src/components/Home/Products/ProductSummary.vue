@@ -1,8 +1,8 @@
 <template>
   <a :href="link" class="d-block h-100">
     <progressive-img
-      :src="product.image"
-      :placeholder="product.image"
+      :src="product.image0"
+      :placeholder="product.image0"
       :blur="30"
       class="pro-thumbimg"
       alt="image"
@@ -11,12 +11,12 @@
       v-if="!mobile"
     />
     <img
-            :src="product.image"
-            class="pro-thumbimg"
-            alt="image"
-            width="306"
-            height="306"
-            v-if="mobile"
+      :src="product.image0"
+      class="pro-thumbimg"
+      alt="image"
+      width="306"
+      height="306"
+      v-if="mobile"
     />
     <div class="card-body visible-lg-only font-14" style="padding: 14px 0;">
       <div class="d-flex justify-content-between align-items-center">

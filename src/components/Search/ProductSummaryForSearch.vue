@@ -1,9 +1,10 @@
 <template>
   <a :href="link" class="d-block h-100 mx-auto">
-    <progressive-img :src="product.image"
-                     class="pro-thumbimg"
-                     :placeholder="product.image"
-                     :blur="30"
+    <progressive-img
+      :src="product.image0"
+      class="pro-thumbimg"
+      :placeholder="product.image0"
+      :blur="30"
     />
     <div class="card-body visible-lg-only font-14">
       <div class="d-flex justify-content-between">

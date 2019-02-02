@@ -1,7 +1,7 @@
 <template>
   <progressive-img
-    :src="product.image"
-    :placeholder="product.image"
+    :src="product.image0"
+    :placeholder="product.image0"
     :blur="30"
     class="pro-img visible-xs"
   >
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "ProductImg",
+  name: "ProductMobileImg",
   props: ["product"]
 };
 </script>

@@ -2,7 +2,7 @@
   <div class="share text-center mb-4">
     <center>
       <iframe
-        src=""
+        :src="url"
         width="140"
         height="80"
         style="border:none;overflow:hidden"
