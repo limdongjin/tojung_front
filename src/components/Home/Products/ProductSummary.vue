@@ -1,13 +1,12 @@
 <template>
-  <a :href="link" class="d-block h-100">
+  <a :href="productLink" class="d-block h-100">
     <img
-      v-lazy="product.image0.url"
-      class="pro-thumbimg lazy-blur"
+      :src="product.image0.url"
+      class="pro-thumbimg"
       alt="image"
       width="306"
       height="306"
-      v-if="!mobile"
-    />
+    >
     <div class="card-body visible-lg-only font-14" style="padding: 14px 0;">
       <div class="d-flex justify-content-between align-items-center">
         <h5 class="card-title text-black font-weight-bold mb-0 font-18">
@@ -22,7 +21,7 @@
         {{ product.subname }}
       </p>
       <div class="d-flex font-14 justify-content-between">
-        <span class="funding-money"> {{ product.funded_money }}원 </span>
+        <span class="funding-money">{{ product.funded_money }}원</span>
         <span class="funding-days">
           <!--{{ // product.funding_day }}-->
         </span>
@@ -33,9 +32,9 @@
 <script>
 export default {
   name: "ProductSummary",
-  props: ["product", "mobile"],
+  props: ["product"],
   computed: {
-    link() {
+    productLink() {
       return `/product/${this.product.id}`;
     }
   }

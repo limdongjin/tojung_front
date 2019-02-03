@@ -63,7 +63,7 @@ export default {
       return this.$store.getters.product;
     },
     packages: function() {
-      return this.product.packages;
+      return this.$store.getters.product.packages;
     }
   },
   methods: {

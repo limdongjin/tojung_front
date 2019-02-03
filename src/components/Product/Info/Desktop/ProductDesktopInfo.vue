@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex visible-lg py-3 pro-info-wrapper justify-content-center">
-    <ProductDesktopImg :image="imageUrl" />
+    <ProductDesktopImg />
     <div class="pro-info">
       <div class="product-title">
         <h4 class="font-24 font-weight-bold">
@@ -11,12 +11,10 @@
         </p>
       </div>
       <ProductFunding
-        :money="product.funded_money"
-        :count="product.funded_count"
         :description="fundingDescription"
         classes="pro-money d-flex font-18 font-weight-bold justify-content-between"
       />
-      <PackageDropDown :product="product" />
+      <PackageDropDown />
 
       <div class="buttons">
         <div class="d-flex">
@@ -62,9 +60,6 @@ export default {
     product: function() {
       return this.$store.getters.product;
     },
-    productPackages: function() {
-      return this.packages;
-    },
     isEnd: function() {
       return this.product.isEnd;
     },
@@ -74,12 +69,6 @@ export default {
     fundingDescription: function() {
       if (this.isEnd) return "상시펀딩중";
       else return "광고펀딩중";
-    },
-    imageUrl: function() {
-      if (!this.$store.getters.product.image0) {
-        return;
-      }
-      return this.$store.getters.product.url;
     }
   }
 };

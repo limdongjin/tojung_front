@@ -1,13 +1,21 @@
 <template>
   <div>
-    <img v-lazy="image" class="pro-img visible-lg lazy-blur" />
+    <img :src="imageUrl" class="pro-img visible-lg" />
   </div>
 </template>
 
 <script>
 export default {
   name: "ProductDesktopImg",
-  props: ["image"]
+  computed: {
+    product: function(){
+      return this.$store.getters.product
+    },
+    imageUrl: function() {
+      if(!this.$store.getters.product.image0) return
+      return this.$store.getters.product.image0.url;
+    }
+  }
 };
 </script>
 

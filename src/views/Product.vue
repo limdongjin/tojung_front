@@ -36,24 +36,55 @@ export default {
     }
   },
   beforeCreate: function() {
-    this.$store.dispatch("SET_PRODUCT");
+    this.$store.dispatch("SET_PRODUCT", this.$route.path);
   },
   mounted: function() {
-    let markComma = this.markComma;
-    let markCommas = function(className) {
-      for (var i = 0; i < $(className).length; i++) {
-        markComma($(className)[i]);
-      }
-    };
-    markCommas(".product-money");
-    markCommas(".funding-money");
+    // alert("d!");
+    this.markCommas(".product-money");
+    // alert("fundein am;");
+    this.markCommasf()
+    // console.log("ss!!");
+    // this.markCommas(".funding-money");
   },
   methods: {
+    markCommasf: function() {
+      var funding_money = $(".funding-money");
+      var money;
+      var putMoney;
+
+      for (let i = 0; i < funding_money.length; i++) {
+        putMoney = funding_money[i];
+        money = funding_money[i];
+        money = $(money).html();
+        if(money.includes(',')) continue
+        if (money === "0원") continue;
+
+        money = money.replace("원", "");
+        money = money.split(",").join("");
+
+        money = money.substring(0, money.length);
+        money = Number(money);
+        money = money.toLocaleString();
+        money = money + "원";
+        $(putMoney).html(money);
+      }
+    },
+    markCommas: function(className) {
+      var len = $(className).length;
+      // alert(len);
+      for (var i = 0; i < len; i++) {
+        console.log($(className)[i]);
+        this.markComma($(className)[i]);
+      }
+    },
     markComma: function(element) {
-      let money = $(element).html();
-      money = money.trim();
+      // alert("makr");
+      var money = $(element).html();
+      console.log(element);
+      if (money.includes(",")) return;
+      money = money.trim().replace("원", "");
+      console.log(money);
       if (money !== "0원" && !money.includes(",")) {
-        money = money.substring(0, money.length - 1);
         money = Number(money);
         money = money.toLocaleString();
         money = money + "원";

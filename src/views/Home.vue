@@ -4,7 +4,7 @@
     <div class="wrapper mt-0 loaded">
       <Categories />
       <CategoryTag />
-      <ProductsMobile :products="products" />
+      <ProductsMobile/>
       <ProductsDesktop :products="products" />
       <MdContents />
       <BottomBar />
@@ -35,8 +35,6 @@ export default {
     this.$store.dispatch("SET_PRODUCTS");
   },
   mounted: function() {
-    console.log("mount");
-    console.log(this.products);
     this.initHomeIndex();
   },
   computed: {
@@ -48,9 +46,9 @@ export default {
     initHomeIndex: function() {
       let slick_index = this.slick_index;
       let cardBodyShow = this.cardBodyShow;
-      let markCommas = this.markCommas;
+      // let markCommas = this.markCommas;
       // alert("init");
-      markCommas();
+      this.markCommas();
       slick_index();
       if (window.matchMedia("screen and (max-width: 576px)").matches) {
         cardBodyShow();

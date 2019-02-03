@@ -5,7 +5,8 @@
     role="tabpanel"
     aria-labelledby="description-tab"
   >
-    <ProductCarousel :carousel-images="carouselImages" />
+    <ProductCarousel />
+
     <YoutubeIframe :youtube-url="youtubeUrl" />
 
     <p class="video-text mb-4 px-3" v-html="videoText"></p>
@@ -29,10 +30,11 @@
     </div>
 
     <!-- 디자인 의도 이미지-->
-    <img v-lazy="designPurpose" class="design-purpose mb-5 w-100 lazy-blur" />
+    <img :src="designPurpose"
+         class="design-purpose mb-5 w-100" />
 
-    <ProductOptions :product_options="product.product_options" />
-    <PackageSummaryImage :image="image1Url" />
+    <ProductOptions />
+    <PackageSummaryImage />
     <ProductDiliveryDesc :isend="isEnd" :days="product.goods_dilivery_date_s" />
     <Campaign />
     <RefundPolicy />
@@ -51,25 +53,26 @@ import PackageSummaryImage from "@/components/Product/Content/Description/Packag
 export default {
   name: "ProductDescription",
   components: {
+    ProductCarousel,
     PackageSummaryImage,
     ProductDiliveryDesc,
     RefundPolicy,
     Campaign,
     ProductOptions,
     FbIframeShare,
-    YoutubeIframe,
-    ProductCarousel
+    YoutubeIframe
   },
   computed: {
-    image1Url: function() {
-      if (!this.product || !this.product.image1) return;
-      return this.product.image1.url;
-    },
     product: function() {
       return this.$store.getters.product;
     },
+    image1Url: function() {
+      // if (!this.product || !this.product.image1) return;
+      return this.product.image1.url;
+    },
     carouselImages: function() {
-      if (!this.product.product_caro_images) return;
+      if (!this.product || !this.product.product_caro_images) return;
+      console.log(this.product.product_caro_images);
       return this.product.product_caro_images;
     },
     youtubeUrl: function() {
@@ -91,7 +94,8 @@ export default {
       return `https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ftojung.me/product/${product_id}&width=450&layout=button_count&action=like&size=small&show_faces=true&share=true&height=80&appId=${app_id}`;
     },
     designPurpose: function() {
-      return this.product.design_purpose;
+      if(!this.product.design_purpose) return
+      return this.product.design_purpose.url;
     },
     isEnd: function() {
       return this.product.isEnd;

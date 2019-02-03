@@ -72,9 +72,9 @@
         </p>
         <pre class="font-18 text-right" v-html="htmlSafe(timeline.name)"></pre>
         <img
-          v-lazy="timelineImageUrl"
+          :src="timelineImageUrl"
           width="240"
-          class="d-block ml-auto lazy-blur"
+          class="d-block ml-auto"
         />
       </div>
     </div>

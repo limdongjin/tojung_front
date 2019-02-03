@@ -12,9 +12,13 @@ export default new Vuex.Store({
   getters: {
     product: state => state.product,
     products: state => state.products
+    // packages: state => state.getters.product.packages,
+    // caros: state => state.product.product_caro_images
   },
   mutations: {
     SET_PRODUCT: (state, product) => {
+      console.log("mut!")
+      console.log(product)
       state.product = product;
     },
     SET_PRODUCTS: (state, products) => {
@@ -22,30 +26,32 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    SET_PRODUCT: async (context, name) => {
+    SET_PRODUCT: async (context, path) => {
       const baseURI = "https://tojung.me";
       await axios
-        .get(`${baseURI}/api/product/1`, {
+        .get(`${baseURI}/api/${path}`, {
           headers: {
-            "Access-Control-Allow-Origin": "*"
+            'Content-Type': 'application/json'
           }
         })
         .then(res => {
           context.commit("SET_PRODUCT", res.data.product);
-        });
+        })
+        .catch(e => console.log(e));
     },
     SET_PRODUCTS: async (context, name) => {
       const baseURI = "https://tojung.me";
       await axios
         .get(`${baseURI}/api/product`, {
           headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,POST,OPTIONS"
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*'
           }
         })
         .then(res => {
           context.commit("SET_PRODUCTS", res.data.products);
-        });
+        })
+        .catch(e=>console.log(e));
     }
   }
 });
