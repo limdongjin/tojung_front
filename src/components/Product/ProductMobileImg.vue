@@ -1,18 +1,22 @@
 <template>
-  <progressive-img
-    :src="product.image0"
-    :placeholder="product.image0"
-    :blur="30"
-    class="pro-img visible-xs"
-  >
-  </progressive-img>
+  <img v-lazy="imageUrl" class="pro-img visible-xs lazy-blur" />
 </template>
 
 <script>
 export default {
   name: "ProductMobileImg",
-  props: ["product"]
+  computed: {
+    product: function() {
+      return this.$store.getters.product;
+    },
+    imageUrl: function() {
+      console.log("후,,,");
+      if (!this.$store.getters.product.image0) {
+        return;
+      }
+      return this.$store.getters.product.image0.url;
+    }
+  }
 };
 </script>
-
 <style scoped></style>

@@ -7,14 +7,11 @@
     >
       <ProductMobileSubmit />
 
-      <ProductMobileLike :product="product" :isLike="isLike" />
+      <ProductMobileLike />
 
-      <!-- <a href="/" class="d-block ml-5 text-white">
-          <%=image_tag(@cdn_url+"heart.svg")%>
-        </a> -->
       <ProductMobileShareOpenButton />
     </nav>
-    <PackageBar :packages="product.packages" />
+    <PackageBar />
     <ProductMobileShareBar />
   </div>
 </template>
@@ -28,7 +25,7 @@ import ProductMobileShareBar from "@/components/Product/BottomBar/ProductMobileS
 
 export default {
   name: "ProductBottomBar",
-  props: ["product"],
+  // props: ["product"],
   components: {
     ProductMobileShareBar,
     PackageBar,
@@ -38,8 +35,10 @@ export default {
   },
   computed: {
     isLike: function() {
-      // 구현중 !!
-      return false;
+      return this.product.isLike;
+    },
+    product: function() {
+      return this.$store.getters.product;
     }
   },
   mounted: function() {
@@ -99,39 +98,20 @@ export default {
       var count = 0;
       var refresh = setInterval(function() {
         ++count;
-        doBlink();
+        this.doBlink();
         if (count >= 4) {
           clearInterval(refresh);
         }
       }, 300);
     });
-
-    // _package
-    for (var i = 0; i < $(".product-money").length; i++) {
-      var money2 = $(".product-money")[i];
-      var money = $(money2).html();
-      if (money !== "0원") {
-        money = money.substring(0, money.length - 1);
-        money = Number(money);
-        money = money.toLocaleString();
-        if (money != NaN) {
-          money = money + "원";
-          $(money2).html(money);
-        }
-      }
-    }
-
-    // _share
-    try {
-      Kakao.init("d88e4ac3d481a3491b72e73fcb0ae1fc");
-    } catch (e) {
-      console.log("kakao init ok");
-    }
   },
   methods: {
     unwrapBottomBar: function() {
       $(".bottom-bar").unwrap();
       $(".overlay2").unwrap();
+    },
+    doBlink: function() {
+      $(".pay-link").toggleClass("hidden0");
     }
   }
 };

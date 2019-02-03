@@ -8,9 +8,7 @@
     <ProductCarousel :carousel-images="carouselImages" />
     <YoutubeIframe :youtube-url="youtubeUrl" />
 
-    <p class="video-text mb-4 px-3">
-      {{ videoText }}
-    </p>
+    <p class="video-text mb-4 px-3" v-html="videoText"></p>
 
     <a
       :href="product.bill_url"
@@ -31,19 +29,11 @@
     </div>
 
     <!-- 디자인 의도 이미지-->
-    <progressive-img
-      :src="designPurpose"
-      :placeholder="designPurpose"
-      :blur="30"
-      class="design-purpose mb-5 w-100"
-    ></progressive-img>
+    <img v-lazy="designPurpose" class="design-purpose mb-5 w-100 lazy-blur" />
 
     <ProductOptions :product_options="product.product_options" />
-    <PackageSummaryImage :image="product.image1" />
-    <ProductDiliveryDesc
-      :isend="isEnd"
-      :days="this.product.goods_dilivery_date_s"
-    />
+    <PackageSummaryImage :image="image1Url" />
+    <ProductDiliveryDesc :isend="isEnd" :days="product.goods_dilivery_date_s" />
     <Campaign />
     <RefundPolicy />
   </div>
@@ -70,11 +60,17 @@ export default {
     YoutubeIframe,
     ProductCarousel
   },
-  props: ["product"],
   computed: {
+    image1Url: function() {
+      if (!this.product || !this.product.image1) return;
+      return this.product.image1.url;
+    },
+    product: function() {
+      return this.$store.getters.product;
+    },
     carouselImages: function() {
-      if (!this.product.caros) return [];
-      return this.product.caros;
+      if (!this.product.product_caro_images) return;
+      return this.product.product_caro_images;
     },
     youtubeUrl: function() {
       return `https://www.youtube.com/embed/${
@@ -82,12 +78,16 @@ export default {
       }?controls=2`;
     },
     videoText: function() {
-      // product.video_text.gsub("\r\n", "<br />").html_safe
-      return this.product.video_text;
+      if (!this.product.video_text) return;
+      var res = this.product.video_text;
+      for (var i = 0; i < this.product.video_text.length; i++) {
+        res = res.replace("\r\n", "<br />");
+      }
+      return res;
     },
     fbShareUrl: function() {
       let app_id = "1014670008686658";
-      let product_id = this.product.id.toString();
+      let product_id = this.product.id;
       return `https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ftojung.me/product/${product_id}&width=450&layout=button_count&action=like&size=small&show_faces=true&share=true&height=80&appId=${app_id}`;
     },
     designPurpose: function() {

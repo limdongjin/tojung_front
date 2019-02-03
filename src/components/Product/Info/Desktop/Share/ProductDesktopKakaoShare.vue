@@ -1,21 +1,28 @@
 <template>
   <li class="d-block">
-    <!--<a href='javascript:createlink("<%= @product.name.gsub("' id="kakao-link-btn"", "")-->
-    <!--%>","<%= @product.subname %>","<%= @cdn_url + @product.image0.path if-->
-    <!--@product.image0.path != nil%>",-->
-    <!--"<%= request.base_url + request.original_fullpath %>");'-->
-    <!--&gt;-->
-    <a>
-      <img :src="kakaoSvg" class="sns-icon d-block mx-auto my-3" />
-    </a>
+    <KakaoShare
+      :shareTitle="shareTitle"
+      :shareDescription="shareDescription"
+      :imageUrl="imageUrl"
+      :webUrl="currentUrl"
+      :classes="desktopShareClasses"
+    />
   </li>
 </template>
 <script>
+import KakaoShare from "@/components/SocialUtil/KakaoShare";
+
 export default {
   name: "ProductDesktopKakaoShare",
+  components: { KakaoShare },
+  props: ["shareTitle", "shareDescription", "imageUrl"],
   computed: {
-    kakaoSvg: function() {
-      return require("@/assets/kakao.svg");
+    currentUrl: function() {
+      console.log(this.shareTitle);
+      return `https://tojung.me/${this.$route.path}`;
+    },
+    desktopShareClasses: function() {
+      return "sns-icon d-block mx-auto my-3";
     }
   }
 };

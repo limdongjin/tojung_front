@@ -9,20 +9,24 @@
     <ProductFunding
       :money="product.funded_money"
       :count="product.funded_count"
-      description="dssdfs"
+      :description="fundingDescription"
       classes="d-flex font-16 font-weight-bold justify-content-between"
     />
   </div>
 </template>
 <script>
 import ProductFunding from "@/components/Product/Info/ProductFunding";
+
 export default {
   name: "ProductMobileInfo",
   components: { ProductFunding },
-  props: ["product"],
   computed: {
-    isEnd: function() {
-      return this.product.isEnd;
+    product: function() {
+      return this.$store.getters.product;
+    },
+    fundingDescription: function() {
+      if (this.product.isEnd) return "상시펀딩중";
+      else return "광고펀딩중";
     }
   }
 };

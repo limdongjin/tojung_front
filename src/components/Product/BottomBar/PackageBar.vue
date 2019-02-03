@@ -16,7 +16,7 @@
             품절
           </div>
           <img
-            :src="productPackage.image0"
+            :src="productPackage.image0.url"
             class="package-img overlay-behind d-block mx-auto"
             :id="productPackage.id"
           />
@@ -28,9 +28,9 @@
               {{ productPackage.name }}
             </h5>
             <pre class="font-12 mb-2 package-content">
-                            <!--<%= package.content.gsub("\r\n", "<br/>").html_safe %>-->
-                            {{ productPackage.content }}
-                        </pre>
+                <!--<%= package.content.gsub("\r\n", "<br/>").html_safe %>-->
+               {{ productPackage.content }}
+            </pre>
           </div>
         </div>
       </div>
@@ -40,7 +40,15 @@
 <script>
 export default {
   name: "PackageBar",
-  props: ["packages"],
+  computed: {
+    product: function() {
+      return this.$store.getters.product;
+    },
+    packages: function() {
+      if (!this.product) return;
+      return this.product.packages;
+    }
+  },
   methods: {
     isSoldOut: function(productPackage) {
       return productPackage.remain_count === 0;

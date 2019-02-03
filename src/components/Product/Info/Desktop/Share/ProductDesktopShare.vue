@@ -6,10 +6,14 @@
       class="share-button dropdown-toggle"
       data-toggle="dropdown"
     >
-      공유하기 for desk tes
+      공유하기
     </button>
     <ul class="dropdown-menu" id="shareDropdown">
-      <ProductDesktopKakaoShare />
+      <ProductDesktopKakaoShare
+        :share-title="product.name"
+        :shareDescription="product.subname"
+        :imageUrl="imageUrl"
+      />
       <ProductDesktopFbShare />
     </ul>
   </div>
@@ -20,6 +24,18 @@ import ProductDesktopKakaoShare from "@/components/Product/Info/Desktop/Share/Pr
 
 export default {
   name: "ProductDesktopShare",
-  components: { ProductDesktopFbShare, ProductDesktopKakaoShare }
+  // props: ["product"],
+  components: { ProductDesktopFbShare, ProductDesktopKakaoShare },
+  computed: {
+    product() {
+      return this.$store.getters.product;
+    },
+    imageUrl() {
+      if (!this.product || !this.product.image0) {
+        return;
+      }
+      return this.product.image0.url;
+    }
+  }
 };
 </script>

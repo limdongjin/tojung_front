@@ -20,12 +20,13 @@
           v-for="productPackage in packages"
           :class="packageClasses(productPackage)"
           v-on:click="packageDropdown($event, product.id, productPackage)"
+          :id="packageId(productPackage)"
         >
           <div class="soldout-text" v-if="isSoldOut(productPackage)">
             품절
           </div>
           <img
-            :src="productPackage.image0"
+            :src="imageUrl(productPackage)"
             class="package-item mx-3 my-3 hide"
             :id="productPackage.id"
           />
@@ -35,14 +36,13 @@
               <p class="mb-0 font-weight-bold mr-3 package-name">
                 {{ productPackage.name }}
               </p>
-              <p class="mb-0 mr-3">
-                <!--<%= package.content.gsub("\r\n", "<br/>").html_safe %>-->
-                {{ productPackage.content }}
-              </p>
+              <p
+                class="mb-0 mr-3"
+                v-html="htmlSafe(productPackage.content)"
+              ></p>
             </div>
             <p class="mb-0 font-red font-weight-bold package-price">
-              <!--<%= package.price %>원-->
-              {{ productPackage.price }}
+              {{ productPackage.price }}원
             </p>
           </div>
         </li>
@@ -58,25 +58,43 @@
 <script>
 export default {
   name: "PackageDropdown",
-  data: function() {
-    return {
-      packages: this.product.packages
-    };
+  computed: {
+    product: function() {
+      return this.$store.getters.product;
+    },
+    packages: function() {
+      return this.product.packages;
+    }
   },
-  props: ["product"],
   methods: {
+    imageUrl: function(productPackage) {
+      if (!productPackage || !productPackage.image0) return;
+      return productPackage.image0.url;
+    },
     isSoldOut: function(productPackage) {
       return productPackage.remain_count === 0;
     },
+    packageId: function(productPackage) {
+      return "package-id-" + productPackage.id;
+    },
     packageClasses: function(productPackage) {
       if (this.isSoldOut(productPackage))
-        return "d-flex productPackage-box bg-overlay soldout-item";
-      else return "d-flex productPackage-box";
+        return "d-flex package-box bg-overlay soldout-item";
+      else return "d-flex package-box";
+    },
+    htmlSafe: function(content) {
+      var res = content;
+      for (var i = 0; i < content.length; i++) {
+        res = res.replace("\r\n", "<br />");
+      }
+      return res;
     },
     packageDropdown: function(event, product_id, productPackage) {
       if (this.isSoldOut(productPackage)) return;
-
-      let x = $(event.target).html();
+      // console.log("dropdown")
+      let x = $("#package-id-" + productPackage.id).html();
+      // let x = $(event.target).html();
+      // console.log(x)
       $("#packageButton").html(x);
       $("#packageContainer").html(x);
       $("#packageContainer").addClass("package-box2 my-3");

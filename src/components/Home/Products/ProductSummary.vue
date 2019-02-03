@@ -1,27 +1,17 @@
 <template>
   <a :href="link" class="d-block h-100">
-    <progressive-img
-      :src="product.image0"
-      :placeholder="product.image0"
-      :blur="30"
-      class="pro-thumbimg"
+    <img
+      v-lazy="product.image0.url"
+      class="pro-thumbimg lazy-blur"
       alt="image"
       width="306"
       height="306"
       v-if="!mobile"
     />
-    <img
-      :src="product.image0"
-      class="pro-thumbimg"
-      alt="image"
-      width="306"
-      height="306"
-      v-if="mobile"
-    />
     <div class="card-body visible-lg-only font-14" style="padding: 14px 0;">
       <div class="d-flex justify-content-between align-items-center">
         <h5 class="card-title text-black font-weight-bold mb-0 font-18">
-          {{ product.title }}
+          {{ product.name }}
         </h5>
         <!-- 이부분 000명으로 수정 -->
         <span class="card-count font-red font-weight-bold font-18">

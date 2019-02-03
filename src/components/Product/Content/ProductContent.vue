@@ -1,10 +1,7 @@
 <template>
   <div class="tab-content" id="myTabContent">
-    <ProductDescription :product="product" />
-    <ProductTimelines
-      :timelines="product.product_timelines"
-      :maker_responses="product.maker_responses"
-    />
+    <ProductDescription />
+    <ProductTimelines />
   </div>
 </template>
 
@@ -14,7 +11,12 @@ import ProductTimelines from "@/components/Product/Content/ProductTimelines";
 
 export default {
   name: "ProductContent",
-  props: ["product"],
-  components: { ProductTimelines, ProductDescription }
+  // props: ["product"],
+  components: { ProductTimelines, ProductDescription },
+  computed: {
+    product() {
+      return this.$store.getters.product;
+    }
+  }
 };
 </script>

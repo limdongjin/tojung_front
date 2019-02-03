@@ -7,20 +7,21 @@
         v-for="product_option in product_options"
       >
         <div class="pro-card">
-          <progressive-img
-            :src="product_option.image0"
-            :placeholder="product_option.image0"
-            class="desc-pro-img"
-          ></progressive-img>
+          <img
+            v-lazy="product_option.image0.url"
+            class="desc-pro-img lazy-blur"
+          />
           <div class="card-body2 py-4 text-center">
-            <h4 class="pro-num mb-2">{{ product_option.name }}</h4>
+            <h4 class="pro-num mb-2">
+              {{ product_option.name }}
+            </h4>
             <p class="font-grey font-12 mb-4">
               {{ packageNamesStr(product_option) }}패키지에 포함
             </p>
-            <pre class="font-14 font-weight-bold mb-2">
-              <!--<%= product_option.content.gsub("\r\n", "<br/>").html_safe %> -->
-              {{ product_option.content }}
-            </pre>
+            <pre
+              class="font-14 font-weight-bold mb-2"
+              v-html="htmlSafe(product_option.content)"
+            ></pre>
             <p class="cost font-12 font-grey">
               <span class="font-14 font-weight-bold text-dark">
                 {{ product_option.price }} </span
@@ -52,10 +53,14 @@ export default {
         res += name + " ";
       });
       return res;
+    },
+    htmlSafe: function(content) {
+      var res = content;
+      for (var i = 0; i < content.length; i++) {
+        res = res.replace("\r\n", "<br />");
+      }
+      return res;
     }
-    // productOptionContent: function () {
-    //   return this.product_option
-    // }
   }
 };
 </script>

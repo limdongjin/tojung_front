@@ -16,16 +16,26 @@ import HeartForm from "@/components/Product/Info/Desktop/HeartForm";
 export default {
   name: "ProductMobileLike",
   components: { HeartForm },
-  props: ["product", "isLike"],
   computed: {
+    product: function() {
+      return this.$store.getters.product;
+    },
+    isLike: function() {
+      if (!this.product) return;
+      return this.product.isLike;
+    },
     heartFormMethod: function() {
       if (this.isLike) return "put";
       else return "post";
     },
-    heartActionLink: function() {
+    likeId: function() {
       // 구현중
+      return 1;
+    },
+    heartActionLink: function() {
       if (!this.isLike) return "/product_like";
-      return "";
+      if (this.likeId) return `/product_like/${this.likeId.toString()}`;
+      return "/product_like";
     }
   }
 };

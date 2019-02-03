@@ -1,0 +1,11 @@
+/*img {*/
+    /*filter: blur(10px);*/
+    /*transition: all 0.2s;*/
+/*}*/
+.lazy-blur{
+    filter: blur(10px);
+    transition: all 0.2s;
+}
+img[lazy="loaded"] {
+    filter: none;
+}

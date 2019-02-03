@@ -1,23 +1,18 @@
 <template>
   <li class="d-block">
-    <a :href="fbShareLink">
-      <progressive-img :src="fbSvg" class="sns-icon d-block mx-auto mb-3">
-      </progressive-img>
-    </a>
+    <FbShare :webUrl="currentUrl" classes="sns-icon d-block mx-auto mb-3" />
   </li>
 </template>
 <script>
+import FbShare from "@/components/SocialUtil/FbShare";
+
 export default {
   name: "ProductDesktopFbShare",
+  components: { FbShare },
   props: ["link"],
   computed: {
-    fbSvg: function() {
-      return require("@/assets/fb.svg");
-    },
-    fbShareLink() {
-      return `https://www.facebook.com/sharer/sharer.php?u=https://tojung.me${
-        this.$route.query.page
-      }&amp;src=sdkpreparse`;
+    currentUrl() {
+      return `https://tojung.me/${this.$route.path}`;
     }
   }
 };

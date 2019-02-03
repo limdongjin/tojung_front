@@ -13,12 +13,21 @@ import "expose-loader?$!expose-loader?jQuery!jquery";
 import "slick-carousel/slick/slick.min.js";
 import "vue-popperjs/dist/vue-popper.min.js";
 import "@/assets/regacy.scss";
-import VueProgressiveImage from 'vue-progressive-image'
+import "@/assets/imageClasses.css";
+import VueProgressiveImage from "vue-progressive-image";
+import axios from "axios";
+import VueAxios from "vue-axios";
+import VueLazyload from "vue-lazyload";
 
-Vue.use(VueProgressiveImage)
-
-// global.$ = $;
+Vue.use(VueProgressiveImage);
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  attempt: 1,
+  listenEvents: ["scroll"]
+});
 Vue.config.productionTip = false;
+// Vue.prototype.$store = store
+Vue.use(VueAxios, axios);
 
 new Vue({
   router,

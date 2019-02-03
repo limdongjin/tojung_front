@@ -30,7 +30,7 @@
           class="col-4 col-md-2 maker_card text-white font-weight-bold"
           v-for="maker_response in maker_responses"
           v-bind:style="{
-            backgroundImage: makerResponseBackgroundImage(maker_response)
+            backgroundImage: `url(${makerImage(maker_response)})`
           }"
         >
           <a :href="maker_url(maker_response)" class="d-block text-white h-100">
@@ -41,10 +41,7 @@
               <p class="mt-2 mt-lg-0 mb-0 ">
                 {{ maker_response.name }}
               </p>
-              <p class="mb-2">
-                <!--(<%= maker_response.maker.desc2.gsub('\n','') %>)-->
-                {{ maker_response.maker.desc2 }}
-              </p>
+              <p class="mb-2" v-html="htmlSafe(maker_response.maker.desc2)"></p>
             </div>
           </a>
         </div>
@@ -73,11 +70,12 @@
           <!--<%= timeline.issued_at.year%>.<%= timeline.issued_at.month%>.<%= timeline.issued_at.day%>-->
           {{ timeline.issued_at }}
         </p>
-        <pre class="font-18 text-right">
-              <!--<%= timeline.name.gsub("\r\n", "<br />").gsub("\n", "<br />").html_safe %>-->
-              {{ timeline.name }}
-          </pre>
-        <img :src="timeline.image0" width="240" class="d-block ml-auto" />
+        <pre class="font-18 text-right" v-html="htmlSafe(timeline.name)"></pre>
+        <img
+          v-lazy="timelineImageUrl"
+          width="240"
+          class="d-block ml-auto lazy-blur"
+        />
       </div>
     </div>
   </div>
@@ -86,11 +84,39 @@
 <script>
 export default {
   name: "ProductTimelines",
-  props: ["timelines", "maker_responses"],
+  computed: {
+    product: function() {
+      return this.$store.getters.product;
+    },
+    timelines: function() {
+      return this.product.product_timelines;
+    },
+    maker_responses: function() {
+      return this.product.maker_responses;
+    }
+  },
   methods: {
-    // background-image0: url(<%= maker_response.maker.image0 %>);
+    makerImage(maker_response) {
+      return maker_response.maker.image0;
+    },
+    timelineImageUrl: function(timeline) {
+      if (!timeline || !timeline.image0) return;
+      return timeline.image0.url;
+    },
+    htmlSafe: function(content) {
+      var res = content;
+      for (var i = 0; i < content.length; i++) {
+        res = res.replace("\r\n", "<br />");
+      }
+      var res2 = res;
+      for (var j = 0; j < res.length; j++) {
+        res2 = res2.replace("\n", "<br />");
+      }
+      return res2;
+    },
     makerResponseBackgroundImage: function(maker_response) {
-      return `url(${maker_response.maker.image0});`;
+      // alert(maker_response.maker.image0)
+      return `background-image: url(${maker_response.maker.image0});`;
     },
     maker_url: function(maker_response) {
       return `/maker/${maker_response.id}`;

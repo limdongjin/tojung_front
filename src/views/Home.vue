@@ -4,8 +4,8 @@
     <div class="wrapper mt-0 loaded">
       <Categories />
       <CategoryTag />
-      <ProductsMobile />
-      <ProductsDesktop />
+      <ProductsMobile :products="products" />
+      <ProductsDesktop :products="products" />
       <MdContents />
       <BottomBar />
     </div>
@@ -31,11 +31,18 @@ export default {
     Categories,
     Carousel
   },
-  // created: function() {
-  //   this.initHomeIndex();
-  // },
+  beforeCreate: function() {
+    this.$store.dispatch("SET_PRODUCTS");
+  },
   mounted: function() {
+    console.log("mount");
+    console.log(this.products);
     this.initHomeIndex();
+  },
+  computed: {
+    products: function() {
+      return this.$store.getters.products;
+    }
   },
   methods: {
     initHomeIndex: function() {

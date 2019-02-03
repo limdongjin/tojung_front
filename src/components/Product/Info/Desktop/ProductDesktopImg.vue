@@ -1,6 +1,7 @@
 <template>
-  <progressive-img :src="image" :placeholder="image" class="pro-img visible-lg">
-  </progressive-img>
+  <div>
+    <img v-lazy="image" class="pro-img visible-lg lazy-blur" />
+  </div>
 </template>
 
 <script>

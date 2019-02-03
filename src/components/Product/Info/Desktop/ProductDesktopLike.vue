@@ -17,21 +17,27 @@ import HeartForm from "@/components/Product/Info/Desktop/HeartForm";
 export default {
   name: "ProductDesktopLike",
   components: { HeartForm },
-  props: ["product", "isLike"],
   computed: {
+    product() {
+      return this.$store.getters.product;
+    },
     description: function() {
       let description;
-      description = this.isLike === true ? "찜 취소하기" : "찜하기";
+      description = this.product.isLike === true ? "찜 취소하기" : "찜하기";
       return description;
     },
     heartFormMethod: function() {
-      if (this.isLike) return "put";
+      if (this.product.isLike) return "put";
       else return "post";
     },
-    heartActionLink: function() {
+    likeId: function() {
       // 구현중
-      if (!this.isLike) return "/product_like";
-      return "";
+      return 1;
+    },
+    heartActionLink: function() {
+      if (!this.product.isLike) return "/product_like";
+      if (this.likeId) return `/product_like/${this.likeId.toString()}`;
+      return "/product_like";
     }
   }
 };
