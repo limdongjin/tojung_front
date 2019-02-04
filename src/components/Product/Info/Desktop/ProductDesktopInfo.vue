@@ -44,11 +44,8 @@ export default {
     ProductDesktopImg,
     ProductDesktopLike
   },
-  // props: ["product"],
   mounted: function() {
     this.setDropdownShareWidth();
-    // this.markCommas();
-    // console.log(this.$route.path)
   },
   methods: {
     setDropdownShareWidth: function() {

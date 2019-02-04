@@ -1,6 +1,5 @@
 <template>
   <div :class="classes">
-    <!--{{ fundingMoney }}-->
     <span class="funding-money"> {{ fundingMoney }}원 </span>
     <span class="font-red"> {{ fundingCount }} 명 </span>
     <span>{{ description }}</span>
@@ -12,7 +11,7 @@ export default {
   props: ["classes", "description"],
   computed: {
     fundingMoney: function () {
-      return this.$store.getters.product.funded_money
+      return this.$store.getters.product.funded_money.toLocaleString()
     },
     fundingCount: function () {
       return this.$store.getters.product.funded_count

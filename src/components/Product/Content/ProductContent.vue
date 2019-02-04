@@ -11,12 +11,6 @@ import ProductTimelines from "@/components/Product/Content/ProductTimelines";
 
 export default {
   name: "ProductContent",
-  // props: ["product"],
-  components: { ProductTimelines, ProductDescription },
-  computed: {
-    product() {
-      return this.$store.getters.product;
-    }
-  }
+  components: { ProductTimelines, ProductDescription }
 };
 </script>

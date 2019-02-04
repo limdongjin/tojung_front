@@ -70,11 +70,6 @@ export default {
       // if (!this.product || !this.product.image1) return;
       return this.product.image1.url;
     },
-    carouselImages: function() {
-      if (!this.product || !this.product.product_caro_images) return;
-      console.log(this.product.product_caro_images);
-      return this.product.product_caro_images;
-    },
     youtubeUrl: function() {
       return `https://www.youtube.com/embed/${
         this.product.youtb_url

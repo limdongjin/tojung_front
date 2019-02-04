@@ -6,7 +6,7 @@
       alt="image"
       width="306"
       height="306"
-    >
+    />
     <div class="card-body visible-lg-only font-14" style="padding: 14px 0;">
       <div class="d-flex justify-content-between align-items-center">
         <h5 class="card-title text-black font-weight-bold mb-0 font-18">
@@ -21,7 +21,7 @@
         {{ product.subname }}
       </p>
       <div class="d-flex font-14 justify-content-between">
-        <span class="funding-money">{{ product.funded_money }}원</span>
+        <span class="funding-money">{{ productFundedMoney(product) }}원</span>
         <span class="funding-days">
           <!--{{ // product.funding_day }}-->
         </span>
@@ -36,6 +36,12 @@ export default {
   computed: {
     productLink() {
       return `/product/${this.product.id}`;
+    }
+  },
+  methods: {
+    productFundedMoney(product) {
+      console.log(product);
+      return product.funded_money.toLocaleString();
     }
   }
 };
