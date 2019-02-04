@@ -32,6 +32,9 @@
 export default {
   name: "Navbar",
   methods: {
+    toHome: function(){
+      this.$router.push("/")
+    },
     sidebar_click: function() {
       $("#dismiss, #dismiss-button, .overlay, #exit-button").on(
         "click",

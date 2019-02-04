@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Router from "vue-router";
+import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Policy from "@/views/Policy";
 import Privacy from "@/views/Privacy";
@@ -7,16 +7,23 @@ import Brand from "@/views/Brand";
 import Search from "@/views/Search";
 import Product from "@/views/Product";
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
-export default new Router({
+export default new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      childre: [
+        {
+          path: "/product/:id",
+          name: "product",
+          component: Product
+        }
+      ]
     },
     {
       path: "/about",

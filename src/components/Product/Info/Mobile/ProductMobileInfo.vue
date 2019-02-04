@@ -7,8 +7,6 @@
       {{ product.subname }}
     </p>
     <ProductFunding
-      :money="product.funded_money"
-      :count="product.funded_count"
       :description="fundingDescription"
       classes="d-flex font-16 font-weight-bold justify-content-between"
     />

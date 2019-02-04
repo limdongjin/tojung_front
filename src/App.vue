@@ -5,7 +5,7 @@
       <atom-spinner :animation-duration="1000" :size="500" :color="'#ff1d5e'" />
     </div>
     <div class="loaded">
-      <router-view></router-view>
+      <router-view />
     </div>
     <Footer />
   </div>
@@ -23,7 +23,7 @@ export default {
       isLoaded: false
     };
   },
-  mounted: function() {
+  mounted() {
     this.isLoaded = true;
   }
 };

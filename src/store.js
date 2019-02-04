@@ -12,13 +12,9 @@ export default new Vuex.Store({
   getters: {
     product: state => state.product,
     products: state => state.products
-    // packages: state => state.getters.product.packages,
-    // caros: state => state.product.product_caro_images
   },
   mutations: {
     SET_PRODUCT: (state, product) => {
-      console.log("mut!")
-      console.log(product)
       state.product = product;
     },
     SET_PRODUCTS: (state, products) => {
@@ -31,7 +27,7 @@ export default new Vuex.Store({
       await axios
         .get(`${baseURI}/api/${path}`, {
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
           }
         })
         .then(res => {
@@ -44,14 +40,14 @@ export default new Vuex.Store({
       await axios
         .get(`${baseURI}/api/product`, {
           headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            'Access-Control-Allow-Origin': '*'
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "*"
           }
         })
         .then(res => {
           context.commit("SET_PRODUCTS", res.data.products);
         })
-        .catch(e=>console.log(e));
+        .catch(e => console.log(e));
     }
   }
 });

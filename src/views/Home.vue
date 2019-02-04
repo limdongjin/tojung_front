@@ -28,13 +28,13 @@ export default {
     Categories,
     Carousel
   },
-  beforeCreate: function() {
+  beforeCreate() {
     this.$store.dispatch("SET_PRODUCTS");
   },
   computed: {
     products: function() {
       return this.$store.getters.products;
     }
-  },
+  }
 };
 </script>

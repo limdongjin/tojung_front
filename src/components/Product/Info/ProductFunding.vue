@@ -10,11 +10,15 @@ export default {
   name: "ProductFunding",
   props: ["classes", "description"],
   computed: {
-    fundingMoney: function () {
-      return this.$store.getters.product.funded_money.toLocaleString()
+    product: function() {
+      return this.$store.getters.product;
     },
-    fundingCount: function () {
-      return this.$store.getters.product.funded_count
+    fundingMoney: function() {
+      if(!this.product.funded_money) return
+      return this.product.funded_money.toLocaleString();
+    },
+    fundingCount: function() {
+      return this.product.funded_count;
     }
   }
 };
