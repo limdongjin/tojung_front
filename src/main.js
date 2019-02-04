@@ -22,11 +22,11 @@ import VueLazyload from "vue-lazyload";
 Vue.use(VueProgressiveImage);
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  attempt: 1
-  // listenEvents: ["scroll", "touchmove"]
+  attempt: 1,
+  listenEvents: ["scroll", "touchmove", "wheel"]
 });
 Vue.config.productionTip = false;
-// Vue.prototype.$store = store
+
 Vue.use(VueAxios, axios);
 Vue.use(store);
 
