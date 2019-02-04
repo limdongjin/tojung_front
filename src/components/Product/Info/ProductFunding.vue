@@ -14,7 +14,8 @@ export default {
       return this.$store.getters.product;
     },
     fundingMoney: function() {
-      if(!this.product.funded_money) return
+      if (this.product.funded_money === 0) return "0";
+      if (!this.product.funded_money) return;
       return this.product.funded_money.toLocaleString();
     },
     fundingCount: function() {
