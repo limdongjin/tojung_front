@@ -1,8 +1,8 @@
 <template>
   <a :href="productLink" class="d-block h-100">
     <img
-      :src="product.image0.url"
-      class="pro-thumbimg"
+      v-lazy="product.image0.url"
+      class="pro-thumbimg lazy-blur"
       alt="image"
       width="306"
       height="306"
@@ -32,10 +32,13 @@
 <script>
 export default {
   name: "ProductSummary",
-  props: ["product"],
+  props: ["product", "mobile"],
   computed: {
     productLink() {
       return `/product/${this.product.id}`;
+    },
+    isMobile() {
+      return this.mobile;
     }
   },
   methods: {

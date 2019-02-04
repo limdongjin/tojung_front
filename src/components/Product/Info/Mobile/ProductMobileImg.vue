@@ -1,5 +1,5 @@
 <template>
-  <img :src="imageUrl" class="pro-img visible-xs" />
+  <img v-lazy="imageUrl" class="pro-img visible-xs lazy-blur" />
 </template>
 
 <script>

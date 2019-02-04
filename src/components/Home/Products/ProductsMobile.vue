@@ -6,7 +6,7 @@
     id="all"
   >
     <div class="card border-0 mb-md-3 mx-md-1" v-for="product in products">
-      <ProductSummary :product="product" />
+      <ProductSummary :product="product" :mobile="true" />
     </div>
   </slick>
 </template>

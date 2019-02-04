@@ -29,7 +29,11 @@
     </div>
 
     <!-- 디자인 의도 이미지-->
-    <img :src="designPurpose" class="design-purpose mb-5 w-100" />
+    <img
+      v-lazy="designPurpose"
+      class="design-purpose mb-5 w-100 lazy-blur"
+      v-if="designPurpose"
+    />
 
     <ProductOptions />
     <PackageSummaryImage />
@@ -87,7 +91,8 @@ export default {
       return `https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ftojung.me/product/${product_id}&width=450&layout=button_count&action=like&size=small&show_faces=true&share=true&height=80&appId=${app_id}`;
     },
     designPurpose: function() {
-      if (!this.product.design_purpose) return;
+      if (!this.product.design_purpose) return false;
+      // console.log(this.product.design_purpose)
       return this.product.design_purpose.url;
     },
     isEnd: function() {

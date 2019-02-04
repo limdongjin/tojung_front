@@ -6,11 +6,10 @@
         class="col-6 col-md-3 col-lg-3 px-0"
         v-for="product_option in product_options"
       >
-        {{ product_options }}
         <div class="pro-card">
           <img
-            :src="product_option.image0.url"
-            class="desc-pro-img"
+            v-lazy="product_option.image0.url"
+            class="desc-pro-img lazy-blur"
           />
           <div class="card-body2 py-4 text-center">
             <h4 class="pro-num mb-2">
@@ -42,10 +41,18 @@
 <script>
 export default {
   name: "ProductOptions",
+  mounted() {
+    console.log("opt!");
+    console.log(this.$store.getters.product.product_options);
+  },
+  computed: {
+    product_options: function() {
+      console.log("opt");
+      console.log(this.$store.getters.product);
+      return this.$store.getters.product.product_options;
+    }
+  },
   methods: {
-    product_options: function(){
-      return this.$store.getters.product.product_options
-    },
     product_option_url: function(product_option) {
       return `/product_option/${product_option.id}`;
     },

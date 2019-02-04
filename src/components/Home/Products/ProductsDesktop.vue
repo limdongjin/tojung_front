@@ -2,7 +2,7 @@
   <div class="container visible-lg card-desktop">
     <div class="row justify-content-between thumb-row">
       <div class="card border-0 mb-md-3 mx-md-1" v-for="product in products">
-        <ProductSummary :product="product" />
+        <ProductSummary :product="product" :mobile="false" />
       </div>
     </div>
   </div>

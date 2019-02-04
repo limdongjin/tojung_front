@@ -28,7 +28,7 @@ export default {
       ) {
         $("#slick-slide-control30")[0].parentElement.outerHTML = "";
       }
-    }, 300);
+    }, 500);
   },
   beforeMount() {
     console.log("mount!");

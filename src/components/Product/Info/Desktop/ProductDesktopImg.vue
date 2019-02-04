@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="imageUrl" class="pro-img visible-lg" />
+    <img v-lazy="imageUrl" class="pro-img visible-lg lazy-blur" />
   </div>
 </template>
 
@@ -8,11 +8,11 @@
 export default {
   name: "ProductDesktopImg",
   computed: {
-    product: function(){
-      return this.$store.getters.product
+    product: function() {
+      return this.$store.getters.product;
     },
     imageUrl: function() {
-      if(!this.$store.getters.product.image0) return
+      if (!this.$store.getters.product.image0) return;
       return this.$store.getters.product.image0.url;
     }
   }
