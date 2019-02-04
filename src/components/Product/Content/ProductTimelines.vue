@@ -6,10 +6,7 @@
     aria-labelledby="timeline-tab"
   >
     <h4 class="text-center font-16 mb-4">
-      <span class="petit-num">
-        <!--<%= @maker_responses.sum(&:send_count) %> -->
-        1123 구현중 </span
-      >청원
+      <span class="petit-num"> {{ send_count }} </span>청원
     </h4>
     <div
       class="ovals d-flex justify-content-center font-weight-bold mb-lg-4 font-10"
@@ -67,14 +64,13 @@
     <div class="time-row">
       <div class="time-post mb-4" v-for="timeline in timelines">
         <p class="date font-18 mb-0">
-          <!--<%= timeline.issued_at.year%>.<%= timeline.issued_at.month%>.<%= timeline.issued_at.day%>-->
           {{ timeline.issued_at }}
         </p>
         <pre class="font-18 text-right" v-html="htmlSafe(timeline.name)"></pre>
         <img
-          :src="timelineImageUrl"
+          v-lazy="timelineImageUrl(timeline)"
           width="240"
-          class="d-block ml-auto"
+          class="d-block ml-auto lazy-blur"
         />
       </div>
     </div>
@@ -93,6 +89,9 @@ export default {
     },
     maker_responses: function() {
       return this.product.maker_responses;
+    },
+    send_count: function() {
+      return this.product.send_count;
     }
   },
   methods: {
