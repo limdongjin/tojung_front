@@ -7,11 +7,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     product: {},
-    products: {}
+    products: {},
+    product_option: {}
   },
   getters: {
     product: state => state.product,
-    products: state => state.products
+    products: state => state.products,
+    product_option: state => state.product_option
   },
   mutations: {
     SET_PRODUCT: (state, product) => {
@@ -19,6 +21,9 @@ export default new Vuex.Store({
     },
     SET_PRODUCTS: (state, products) => {
       state.products = products;
+    },
+    SET_PRODUCT_OPTION: (state, product_option) =>{
+      state.product_option = product_option
     }
   },
   actions: {
@@ -46,6 +51,20 @@ export default new Vuex.Store({
         })
         .then(res => {
           context.commit("SET_PRODUCTS", res.data.products);
+        })
+        .catch(e => console.log(e));
+    },
+    SET_PRODUCT_OPTION: async (context, path) => {
+      const baseURI = "https://tojung.me";
+      await axios
+        .get(`${baseURI}/api/${path}`, {
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "*"
+          }
+        })
+        .then(res => {
+          context.commit("SET_PRODUCT_OPTION", res.data.product_option);
         })
         .catch(e => console.log(e));
     }
