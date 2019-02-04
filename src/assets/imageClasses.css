@@ -3,8 +3,8 @@
     /*transition: all 0.2s;*/
 /*}*/
 .lazy-blur{
-    filter: blur(10px);
-    transition: all 0.05s;
+    filter: blur(5px);
+    transition: all 1s;
 }
 img[lazy="loaded"] {
     filter: none;
