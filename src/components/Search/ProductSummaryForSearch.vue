@@ -1,6 +1,6 @@
 <template>
   <a :href="link" class="d-block h-100 mx-auto">
-    <img :src="product.image0.url" class="pro-thumbimg" />
+    <img v-lazy="product.image0.url" class="pro-thumbimg lazy-blur" />
     <div class="card-body visible-lg-only font-14">
       <div class="d-flex justify-content-between">
         <h5 class="card-title text-black font-weight-bold mb-0 font-18">

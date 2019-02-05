@@ -20,10 +20,5 @@ export default {
     prop: 'results'
   },
   props: ['results']
-  // data() {
-  //   return {
-  //     productsSearchResult: []
-  //   };
-  // }
 };
 </script>
