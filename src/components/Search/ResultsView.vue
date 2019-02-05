@@ -1,9 +1,10 @@
 <template>
   <div class="container">
     <div class="row">
+      {{ productsSearchResult }}
       <div
         class="card result-card col-12 col-md-6 col-lg-4"
-        v-for="product in productsResult"
+        v-for="product in productsSearchResult"
       >
         <ProductSummaryForSearch :product="product" />
       </div>
@@ -16,8 +17,6 @@ import ProductSummaryForSearch from "@/components/Search/ProductSummaryForSearch
 export default {
   name: "ResultsView",
   components: { ProductSummaryForSearch },
-  props: {
-    productsResult: {}
-  }
+  props: ["productsSearchResult"]
 };
 </script>
