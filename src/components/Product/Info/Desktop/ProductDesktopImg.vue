@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img v-lazy="imageUrl" class="pro-img visible-lg lazy-blur" />
+    <img :src="imageUrl" class="pro-img visible-lg" />
   </div>
 </template>
 

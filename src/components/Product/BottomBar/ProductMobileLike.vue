@@ -20,21 +20,18 @@ export default {
     product: function() {
       return this.$store.getters.product;
     },
-    isLike: function() {
-      if (!this.product) return;
-      return this.product.isLike;
-    },
     heartFormMethod: function() {
       if (this.isLike) return "put";
       else return "post";
     },
     likeId: function() {
-      // 구현중
-      return 1;
+      return this.product.like_id;
+    },
+    isLike: function() {
+      return this.likeId && this.likeId !== -1;
     },
     heartActionLink: function() {
-      if (!this.isLike) return "/product_like";
-      if (this.likeId) return `/product_like/${this.likeId.toString()}`;
+      if (this.isLike) return `/product_like/${this.likeId.toString()}`;
       return "/product_like";
     }
   }

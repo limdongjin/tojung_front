@@ -2,10 +2,11 @@
   <form
     :action="action_link"
     accept-charset="UTF-8"
-    :method="hfmethod"
+    method="post"
     :class="formClasses"
   >
     <input name="utf8" type="hidden" value="✓" />
+    <input type="hidden" name="_method" :value="hfmethod" v-if="hfmethod === 'put'">
     <input
       type="hidden"
       :name="input_name"

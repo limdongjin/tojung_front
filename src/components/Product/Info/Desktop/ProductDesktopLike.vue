@@ -23,20 +23,21 @@ export default {
     },
     description: function() {
       let description;
-      description = this.product.isLike === true ? "찜 취소하기" : "찜하기";
+      description = this.isLike === true ? "찜 취소하기" : "찜하기";
       return description;
     },
     heartFormMethod: function() {
-      if (this.product.isLike) return "put";
+      if (this.isLike) return "put";
       else return "post";
     },
     likeId: function() {
-      // 구현중
-      return 1;
+      return this.product.like_id;
+    },
+    isLike: function() {
+      return this.likeId && this.likeId !== -1;
     },
     heartActionLink: function() {
-      if (!this.product.isLike) return "/product_like";
-      if (this.likeId) return `/product_like/${this.likeId.toString()}`;
+      if (this.isLike) return `/product_like/${this.likeId.toString()}`;
       return "/product_like";
     }
   }
