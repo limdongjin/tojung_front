@@ -112,14 +112,6 @@ export default {
   // All slick methods can be used too, example here
   methods: {
     packageImgClick(event) {
-      // setTimeout(() => {
-        // console.log(this.$refs.slick.$el.getElementsById('slick-slide-control30'));
-        // console.log("gogo")
-        // console.log($('#slick-slide-control31'))
-        // if($)
-        // $('#slick-slide-control30')
-      // },30)
-      // console.log(event.target.classList.remove('d-block'))
       if (event.target.classList.contains("border-red")) {
         event.target.classList.remove("border-red");
       } else {

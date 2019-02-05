@@ -1441,7 +1441,7 @@ li:hover {
     position: fixed;
     /* full screen */
     width: 100vw;
-    height: calc(100vh-226px);
+    //height: calc(100vh-226px);
     /* transparent black */
     background: rgba(0, 0, 0, 0.5);
     /* middle layer, i.e. appears below the sidebar */
