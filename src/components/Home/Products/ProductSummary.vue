@@ -36,14 +36,10 @@ export default {
   computed: {
     productLink() {
       return `/product/${this.product.id}`;
-    },
-    isMobile() {
-      return this.mobile;
     }
   },
   methods: {
     productFundedMoney(product) {
-      console.log(product);
       return product.funded_money.toLocaleString();
     }
   }

@@ -23,7 +23,8 @@ Vue.use(VueProgressiveImage);
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   attempt: 1,
-  listenEvents: ["scroll", "touchmove", "wheel"]
+  throttleWait: 10,
+  listenEvents: ['scroll', 'wheel', 'mousewheel', 'resize', 'animationend', 'transitionend', 'touchmove']
 });
 Vue.config.productionTip = false;
 
