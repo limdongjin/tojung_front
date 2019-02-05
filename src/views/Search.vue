@@ -11,8 +11,7 @@
     <h4 class="font-16 font-lg-24 px-3 py-3" v-else>
       {{ term }}(으)로 검색하신 결과를 찾을 수 없습니다.
     </h4>
-
-    <ResultsView @productsSearchResult="productsSearchResult" />
+    <ResultsView v-model="productsSearchResult" />
   </div>
 </template>
 
@@ -22,7 +21,10 @@ import ResultsView from "@/components/Search/ResultsView";
 
 export default {
   name: "Search",
-  components: { ResultsView, SearchBox },
+  components: {
+    ResultsView,
+    SearchBox
+  },
   data() {
     return {
       productsSearchResult: [],
@@ -35,8 +37,6 @@ export default {
       return this.productsSearchResult;
     },
     getTerm(childEmitResult) {
-      console.log("get Term!");
-      console.log(childEmitResult);
       this.term = childEmitResult;
       return this.term;
     }

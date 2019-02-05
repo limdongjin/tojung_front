@@ -19,6 +19,8 @@
         @keyup="changeTerm"
         placeholder="검색"
         class="search-form my-auto"
+        autocomplete="off"
+        autofocus="autofocus"
       />
     </div>
   </form>
@@ -35,24 +37,19 @@ export default {
   },
   computed: {
     actionLink() {
-      let host = "http://127.0.0.1:3000";
+      let host = "https://tojung.me";
       return `${host}/api/search/products?term=${this.term}`;
     }
   },
   methods: {
     submitSearch() {
       axios.get(this.actionLink).then(res => {
-        console.log("submit ok!");
-        console.log(this.actionLink);
-        // console.log(res);
         this.$emit("productsSearchResult", res.data.products);
         this.$emit("term", this.term);
       });
     },
     changeTerm() {
-      console.log("term chang");
-      console.log(this.term);
-      this.$emit("term", this.term);
+      this.submitSearch();
     }
   }
 };
