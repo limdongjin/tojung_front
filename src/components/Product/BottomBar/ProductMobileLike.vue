@@ -31,8 +31,8 @@ export default {
       return this.likeId && this.likeId !== -1;
     },
     heartActionLink: function() {
-      if (this.isLike) return `/product_like/${this.likeId.toString()}`;
-      return "/product_like";
+      if (this.isLike) return `/api/product_like/${this.likeId.toString()}`;
+      return "/api/product_like";
     }
   }
 };

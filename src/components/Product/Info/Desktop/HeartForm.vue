@@ -4,14 +4,16 @@
     accept-charset="UTF-8"
     method="post"
     :class="formClasses"
+    @submit.prevent="submitHeart"
   >
-    <input name="utf8" type="hidden" value="✓" />
-    <input type="hidden" name="_method" :value="hfmethod" v-if="hfmethod === 'put'">
+    <input v-model="form.utf8" name="utf8" type="hidden" />
+    <input v-model="form.action_method" type="hidden" name="_method" />
+
     <input
       type="hidden"
       :name="input_name"
       :id="input_id"
-      :value="input_value"
+      v-model="form.input_value"
     />
     <button :class="buttonClasses" :id="buttonIds">
       <img :src="heartSvg" :class="heartClasses" />
@@ -20,8 +22,22 @@
   </form>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: "HeartForm",
+  // model: {
+  // },
+  data() {
+    return {
+      form: {
+        action_method: this.hfmethod,
+        input_name: this.input_name,
+        utf8: "✓",
+        input_value: this.input_value
+      }
+    };
+  },
   props: [
     "action_link",
     "hfmethod",
@@ -56,6 +72,27 @@ export default {
     heartDescription: function() {
       if (!this.mobile) return this.description;
       else return undefined;
+    },
+    actionLink() {
+      let host = "https://tojung.me";
+      return `${host}${this.action_link}`;
+    }
+  },
+  methods: {
+    submitHeart() {
+      axios
+        .post(this.actionLink, {
+          params: {
+            _method: this.form.action_method,
+            input_name: this.form.input_name,
+            utf8: this.form.utf8,
+            input_value: this.form.input_value
+          }
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(e => console.log(e.response));
     }
   }
 };
