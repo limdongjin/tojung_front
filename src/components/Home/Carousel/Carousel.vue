@@ -59,15 +59,6 @@ export default {
   },
   mounted: function() {
     $(".cover").unwrap();
-    $(".cover_img")
-      .get(0)
-      .play();
-    $(".cover_img")
-      .get(1)
-      .play();
-    $(".cover_img")
-      .get(2)
-      .play();
   }
 };
 </script>
