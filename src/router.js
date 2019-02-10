@@ -7,6 +7,8 @@ import Brand from "@/views/Brand";
 import Search from "@/views/Search";
 import Product from "@/views/Product";
 import ProductOption from "@/views/ProductOption";
+import Registration from "@/views/Registration";
+import Login from "@/views/Login";
 
 Vue.use(VueRouter);
 
@@ -57,8 +59,18 @@ export default new VueRouter({
       component: ProductOption
     },
     {
-      path: '*',
-      redirect: '/'
+      path: "/users/sign_up",
+      name: "Registration",
+      component: Registration
+    },
+    {
+      path: "/users/sign_in",
+      name: "Login",
+      component: Login
+    },
+    {
+      path: "*",
+      redirect: "/"
     }
   ]
 });

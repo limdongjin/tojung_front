@@ -1,5 +1,5 @@
 <template>
-  <a :href="productLink" class="d-block h-100">
+  <router-link :to="productLink" class="d-block h-100">
     <img
       v-lazy="product.image0.url"
       class="pro-thumbimg lazy-blur"
@@ -27,7 +27,7 @@
         </span>
       </div>
     </div>
-  </a>
+  </router-link>
 </template>
 <script>
 export default {

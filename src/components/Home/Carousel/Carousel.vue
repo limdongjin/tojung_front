@@ -58,7 +58,7 @@ export default {
     };
   },
   mounted: function() {
-    $(".cover").unwrap();
+    // $(".cover").unwrap();
   }
 };
 </script>

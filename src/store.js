@@ -29,11 +29,28 @@ export default new Vuex.Store({
   actions: {
     SET_PRODUCT: async (context, path) => {
       const baseURI = "https://tojung.me";
+      let getCookie = await function(cookieName) {
+        var name = cookieName + "=";
+        var ca = document.cookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      };
+      let headers = await {
+        "Content-Type": "application/json",
+        "X-USER-TOKEN": getCookie("token")
+      };
+      // console.log(headers)
       await axios
         .get(`${baseURI}/api/${path}`, {
-          headers: {
-            "Content-Type": "application/json"
-          }
+          headers: headers
         })
         .then(res => {
           context.commit("SET_PRODUCT", res.data.product);

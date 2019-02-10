@@ -4,7 +4,7 @@
       :action_link="heartActionLink"
       :hfmethod="heartFormMethod"
       input_id="product_id"
-      input_name="product_name"
+      input_name="product_id"
       :input_value="product.id"
       :mobile="false"
       :description="description"
