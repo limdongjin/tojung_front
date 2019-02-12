@@ -48,7 +48,7 @@ export default {
       return this.status;
     },
     action_method: function() {
-      if (this.like_id) return "put";
+      if (this.like_id && this.like_id !== -1) return "put";
       return "post";
     },
     formClasses: function() {
