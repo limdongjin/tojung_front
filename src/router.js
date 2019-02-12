@@ -9,6 +9,8 @@ import Product from "@/views/Product";
 import ProductOption from "@/views/ProductOption";
 import Registration from "@/views/Registration";
 import Login from "@/views/Login";
+import UserUpdate from "./views/UserUpdate";
+import Mypage from "./views/Mypage";
 
 Vue.use(VueRouter);
 
@@ -49,6 +51,11 @@ export default new VueRouter({
       component: Search
     },
     {
+      path: "/home/mypage",
+      name: "mypage",
+      component: Mypage
+    },
+    {
       path: "/product/:id",
       name: "product",
       component: Product
@@ -67,6 +74,11 @@ export default new VueRouter({
       path: "/users/sign_in",
       name: "Login",
       component: Login
+    },
+    {
+      path: "/users/update",
+      name: "UserUpdate",
+      component: UserUpdate
     },
     {
       path: "*",

@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     actionLink() {
-      let host = "https://tojung.me";
+      let host = this.$apiHost;
       return `${host}/api/search/products?term=${this.term}`;
     }
   },

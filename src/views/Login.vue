@@ -117,7 +117,7 @@ export default {
       return require("@/assets/google.svg");
     },
     standardAuthActionLink() {
-      return "https://api.tojung.me/users/sign_in";
+      return `${this.$apiHost}/users/sign_in`;
     }
   },
   methods: {
@@ -163,12 +163,8 @@ export default {
             d.setTime(d.getTime() + cookieExdays * 24 * 60 * 60 * 1000);
             var expires = "expires=" + d.toUTCString();
             document.cookie =
-              cookieName +
-              "=" +
-              cookieValue +
-              ";" +
-              expires +
-              ";path=/;domain=tojung.me";
+              cookieName + "=" + cookieValue + ";" + expires + ";path=/;";
+            // domain=tojung.me";
           };
           setCookie("token", res.data.token, 1);
           location.href = "/";

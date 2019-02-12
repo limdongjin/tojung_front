@@ -79,8 +79,7 @@ export default {
       return undefined;
     },
     actionLink: function() {
-      // let host = "http://127.0.0.1:3000";
-      let host = "https://api.tojung.me";
+      let host = this.$apiHost;
       let action_link = "/api/product_like";
       if (this.like_id) action_link += "/" + this.like_id;
       return `${host}${action_link}`;
