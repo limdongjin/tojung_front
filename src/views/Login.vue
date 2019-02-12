@@ -169,7 +169,7 @@ export default {
           setCookie("token", res.data.token, 1);
           location.href = "/";
         })
-        .catch(e => console.log(e.response));
+        .catch(e => alert(e.response.data));
     }
   }
 };

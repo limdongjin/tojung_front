@@ -38,9 +38,9 @@ Vue.config.productionTip = false;
 
 Vue.use(VueAxios, axios);
 Vue.use(store);
-Vue.prototype.$apiHost = "http://127.0.0.1:3000";
+Vue.prototype.$apiHost = "https://api.tojung.me";
 // Vue.prototype.$apiHost = "https://api.tojung.me"
-Vue.prototype.$Host = "http://127.0.0.1:3000";
+Vue.prototype.$Host = "https://tojung.me";
 // Vue.prototype.$Host = "https://tojung.me"
 
 new Vue({
