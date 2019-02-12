@@ -8,6 +8,8 @@
       :input_value="product.id"
       :mobile="false"
       :description="description"
+      :like_id="likeId"
+      :like_status="likeStatus"
     />
   </div>
 </template>
@@ -23,7 +25,7 @@ export default {
     },
     description: function() {
       let description;
-      description = this.isLike === true ? "찜 취소하기" : "찜하기";
+      description = this.likeStatus === true ? "찜 취소하기" : "찜하기";
       return description;
     },
     heartFormMethod: function() {
@@ -35,6 +37,9 @@ export default {
     },
     isLike: function() {
       return this.likeId && this.likeId !== -1;
+    },
+    likeStatus: function(){
+      return this.product.is_product_like
     },
     heartActionLink: function() {
       if (this.isLike) return `/api/product_like/${this.likeId.toString()}`;

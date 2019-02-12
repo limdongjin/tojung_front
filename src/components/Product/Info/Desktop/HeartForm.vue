@@ -5,18 +5,7 @@
     method="post"
     :class="formClasses"
     @submit.prevent="submitHeart"
-    v-model="form.action_link"
   >
-    <input v-model="form.utf8" name="utf8" type="hidden" />
-    <input v-model="form.action_method" type="hidden" name="_method" />
-
-    <input
-      type="hidden"
-      :name="form.input_name"
-      :id="form.input_id"
-      v-model="form.input_value"
-    />
-    <!--v-bind:value="input_value"-->
     <button :class="buttonClasses" :id="buttonIds">
       <img :src="heartSvg" :class="heartClasses" />
       {{ heartDescription }}
@@ -28,20 +17,6 @@ import axios from "axios";
 
 export default {
   name: "HeartForm",
-  data: function() {
-    return {
-      form: {
-        action_method: this.hfmethod,
-        input_name: this.input_name,
-        utf8: "✓",
-        input_value: this.input_value,
-        action_link: this.action_link,
-        product_like_id: -1
-      },
-      status: false,
-      token: ""
-    };
-  },
   props: [
     "action_link",
     "hfmethod",
@@ -49,36 +24,39 @@ export default {
     "input_id",
     "input_value",
     "mobile",
-    "description"
+    "description",
+    "like_id",
+    "like_status"
   ],
-  created: function() {
-    // console.log(this.$store.state.product.id)
-    this.token = this.getCookie("token");
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        "X-USER-TOKEN": this.token
-      }
+  data() {
+    return {
+      form: {
+        action_method: this.hfmethod,
+        input_name: this.input_name,
+        utf8: "✓",
+        input_value: this.input_value,
+        action_link: this.action_link,
+        product_like_id: this.like_id
+      },
+      status: undefined,
+      like_description: undefined
     };
   },
   computed: {
-    product: function() {
-      return this.$store.getters.product;
+    likeStatus: function(){
+      if(this.status === undefined) return this.like_status
+      return this.status
     },
-    product_id: function() {
-      console.log("p id");
-
-      return this.form.input_value;
-    },
-    getToken: function() {
-      return this.token;
+    action_method: function() {
+      if (this.like_id) return "put";
+      return "post";
     },
     formClasses: function() {
       if (this.mobile) return "ml-5 text-white";
-      else return "";
+      return "";
     },
     heartSvg: function() {
-      if (this.form.action_method === "put" && this.status === true)
+      if (this.action_method === "put" && this.likeStatus === true)
         return require("@/assets/heart-red.svg");
       if (this.mobile) return require("@/assets/heart-white.svg");
       return require("@/assets/heart.svg");
@@ -96,70 +74,62 @@ export default {
       return "heart-img-mobile";
     },
     heartDescription: function() {
+      if(!this.mobile && this.like_description) return this.like_description
       if (!this.mobile) return this.description;
-      else return undefined;
+      return undefined;
     },
     actionLink: function() {
       let host = "http://127.0.0.1:3000";
-      return `${host}${this.form.action_link}`;
+      let action_link = "/api/product_like";
+      if (this.like_id) action_link += "/" + this.like_id;
+      return `${host}${action_link}`;
     }
   },
   methods: {
-    getCookie(cookieName) {
-      var name = cookieName + "=";
-      var ca = document.cookie.split(";");
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == " ") {
-          c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-        }
-      }
-      return "";
-    },
     async submitHeart() {
-      // console.log(this.getToken)
-      console.log("submit heart!");
       let config = await {
         headers: {
           "Content-Type": "application/json",
-          "X-USER-TOKEN": this.getToken
+          "X-USER-TOKEN": this.$store.getters.token
         }
       };
-      console.log(this.getToken);
       let input_value = await this.input_value;
       let params = await {
-        _method: this.form.action_method,
+        _method: this.action_method,
         [this.form.input_name]: input_value,
         utf8: this.form.utf8,
-        product_like_id: this.form.product_like_id
+        product_like_id: this.like_id
       };
+      console.log(params);
       await console.log(params);
-      if (this.form.action_method === "post") {
+      if (this.action_method === "post") {
         await axios
           .post(this.actionLink, params, config)
           .then(res => {
-            console.log("result!!!!!");
             this.form.action_method = "put";
             this.form.action_link += "/" + res.data.product_like.pop().id;
             this.form.product_like_id = res.data.product_like.pop().id;
             this.status = true;
+            this.like_description = "찜 취소하기"
             console.log(res);
           })
           .catch(e => {
-            console.log(e.response);
+            if (e.response.status === 401) {
+              location.href = "/users/sign_in";
+            }
           });
       } else {
         await axios
           .put(this.actionLink, params, config)
           .then(res => {
-            console.log(res);
             this.status = res.data.product_like.status;
+            if(this.status === true) this.like_description = "찜 취소하기"
+            else this.like_description = "찜 하기"
           })
           .catch(e => {
-            return console.log(e.response);
+            if (e.response.status === 401) {
+              location.href = "/users/sign_in";
+            }
           });
       }
     }

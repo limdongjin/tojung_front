@@ -8,6 +8,8 @@
       :input_value="product.id"
       :mobile="true"
       description="x"
+      :like_id="likeId"
+      :like_status="likeStatus"
     />
   </div>
 </template>
@@ -24,7 +26,12 @@ export default {
       if (this.isLike) return "put";
       else return "post";
     },
+    likeStatus: function(){
+      return this.product.is_product_like
+    },
     likeId: function() {
+      console.log("like id!")
+      console.log(this.product.like_id)
       return this.product.like_id;
     },
     isLike: function() {

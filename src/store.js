@@ -8,12 +8,14 @@ export default new Vuex.Store({
   state: {
     product: {},
     products: {},
-    product_option: {}
+    product_option: {},
+    token: ""
   },
   getters: {
     product: state => state.product,
     products: state => state.products,
-    product_option: state => state.product_option
+    product_option: state => state.product_option,
+    token: state => state.token
   },
   mutations: {
     SET_PRODUCT: (state, product) => {
@@ -24,11 +26,18 @@ export default new Vuex.Store({
     },
     SET_PRODUCT_OPTION: (state, product_option) => {
       state.product_option = product_option;
+    },
+    SET_TOKEN: (state, token) => {
+      state.token = token;
     }
   },
   actions: {
+    SET_TOKEN: async (context, token) => {
+      context.commit("SET_TOKEN", token)
+    },
     SET_PRODUCT: async (context, path) => {
-      const baseURI = "https://tojung.me";
+      // const baseURI = "https://tojung.me";
+      const baseURI = "http://127.0.0.1:3000"
       let getCookie = await function(cookieName) {
         var name = cookieName + "=";
         var ca = document.cookie.split(";");
@@ -47,7 +56,8 @@ export default new Vuex.Store({
         "Content-Type": "application/json",
         "X-USER-TOKEN": getCookie("token")
       };
-      // console.log(headers)
+      await context.commit("SET_TOKEN", getCookie("token"))
+      console.log(headers)
       await axios
         .get(`${baseURI}/api/${path}`, {
           headers: headers
