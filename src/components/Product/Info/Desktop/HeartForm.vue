@@ -81,7 +81,7 @@ export default {
     actionLink: function() {
       let host = this.$apiHost;
       let action_link = "/api/product_like";
-      if (this.like_id) action_link += "/" + this.like_id;
+      if (this.like_id && this.like_id !== -1) action_link += "/" + this.like_id;
       return `${host}${action_link}`;
     }
   },
