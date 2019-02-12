@@ -4,11 +4,7 @@
       <section class="profile d-flex px-3 py-3">
         <!-- Desktop -->
         <div class="profile-img-box">
-          <img :src="user.image0.url" class="profile-img visible-lg" />
-          <!-- 디폴트 이미지 필요 -->
-          <!--<%=image_tag("default.png", class: "profile-img visible-lg") if-->
-          <!--current_user.image0 == nil%> <%#=image_tag(current_user.image0, class:-->
-          <!--"profile-img visible-lg") if current_user.image0 != nil%>-->
+          <img :src="userImage" class="profile-img visible-lg" />
         </div>
         <!-- // Desktop -->
         <div class="mylog font-12 font-lg-14 my-auto justify-content-around">
@@ -84,10 +80,7 @@
             </a>
           </div>
         </div>
-        <img :src="user.image0.url" class="profile-img visible-xs" />
-        <!-- 디폴트 이미지 필요 -->
-        <!--<%=image_tag("default.png", class: "profile-img visible-xs") if-->
-        <!--current_user.image0 == nil%>-->
+        <img :src="userImage" class="profile-img visible-xs" />
       </section>
       <hr />
       <div class="container">
@@ -149,6 +142,10 @@ export default {
     },
     layerPng() {
       return require("@/assets/layer.png");
+    },
+    userImage() {
+      if (this.user.image0 && this.image0.url) return this.user.image0;
+      return require("@/assets/default.png");
     }
   },
   methods: {
