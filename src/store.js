@@ -33,11 +33,11 @@ export default new Vuex.Store({
   },
   actions: {
     SET_TOKEN: async (context, token) => {
-      context.commit("SET_TOKEN", token)
+      context.commit("SET_TOKEN", token);
     },
     SET_PRODUCT: async (context, path) => {
-      // const baseURI = "https://tojung.me";
-      const baseURI = "http://127.0.0.1:3000"
+      const baseURI = "https://api.tojung.me";
+      // const baseURI = "http://127.0.0.1:3000"
       let getCookie = await function(cookieName) {
         var name = cookieName + "=";
         var ca = document.cookie.split(";");
@@ -56,8 +56,8 @@ export default new Vuex.Store({
         "Content-Type": "application/json",
         "X-USER-TOKEN": getCookie("token")
       };
-      await context.commit("SET_TOKEN", getCookie("token"))
-      console.log(headers)
+      await context.commit("SET_TOKEN", getCookie("token"));
+      console.log(headers);
       await axios
         .get(`${baseURI}/api/${path}`, {
           headers: headers
@@ -68,7 +68,7 @@ export default new Vuex.Store({
         .catch(e => console.log(e));
     },
     SET_PRODUCTS: async (context, name) => {
-      const baseURI = "https://tojung.me";
+      const baseURI = "https://api.tojung.me";
       await axios
         .get(`${baseURI}/api/product`, {
           headers: {
@@ -82,7 +82,7 @@ export default new Vuex.Store({
         .catch(e => console.log(e));
     },
     SET_PRODUCT_OPTION: async (context, path) => {
-      const baseURI = "https://tojung.me";
+      const baseURI = "https://api.tojung.me";
       await axios
         .get(`${baseURI}/api/${path}`, {
           headers: {
@@ -96,7 +96,7 @@ export default new Vuex.Store({
         .catch(e => console.log(e));
     },
     SET_PRODUCTS_SEARCH_RESULT: async (context, path) => {
-      const baseURI = "https://tojung.me";
+      const baseURI = "https://api.tojung.me";
       await axios
         .get(`${baseURI}/api/${path}`, {
           headers: {

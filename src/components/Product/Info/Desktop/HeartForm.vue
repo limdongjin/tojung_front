@@ -43,9 +43,9 @@ export default {
     };
   },
   computed: {
-    likeStatus: function(){
-      if(this.status === undefined) return this.like_status
-      return this.status
+    likeStatus: function() {
+      if (this.status === undefined) return this.like_status;
+      return this.status;
     },
     action_method: function() {
       if (this.like_id) return "put";
@@ -74,12 +74,13 @@ export default {
       return "heart-img-mobile";
     },
     heartDescription: function() {
-      if(!this.mobile && this.like_description) return this.like_description
+      if (!this.mobile && this.like_description) return this.like_description;
       if (!this.mobile) return this.description;
       return undefined;
     },
     actionLink: function() {
-      let host = "http://127.0.0.1:3000";
+      // let host = "http://127.0.0.1:3000";
+      let host = "https://api.tojung.me";
       let action_link = "/api/product_like";
       if (this.like_id) action_link += "/" + this.like_id;
       return `${host}${action_link}`;
@@ -110,7 +111,7 @@ export default {
             this.form.action_link += "/" + res.data.product_like.pop().id;
             this.form.product_like_id = res.data.product_like.pop().id;
             this.status = true;
-            this.like_description = "찜 취소하기"
+            this.like_description = "찜 취소하기";
             console.log(res);
           })
           .catch(e => {
@@ -123,8 +124,8 @@ export default {
           .put(this.actionLink, params, config)
           .then(res => {
             this.status = res.data.product_like.status;
-            if(this.status === true) this.like_description = "찜 취소하기"
-            else this.like_description = "찜 하기"
+            if (this.status === true) this.like_description = "찜 취소하기";
+            else this.like_description = "찜 하기";
           })
           .catch(e => {
             if (e.response.status === 401) {

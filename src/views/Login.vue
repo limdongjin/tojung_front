@@ -4,8 +4,7 @@
       <form
         class="button_to"
         method="post"
-        action="/users/auth/facebook"
-        @submit.prevent="facebookAuth"
+        action="https://api.tojung.me/users/auth/facebook"
       >
         <button class="button-none bg-base" type="submit">
           <img
@@ -18,8 +17,7 @@
       <form
         class="button_to"
         method="post"
-        action="/users/auth/google_oauth2"
-        @submit.prevent="googleAuth"
+        action="https://api.tojung.me/users/auth/google_oauth2"
       >
         <button class="button-none bg-base" type="submit">
           <img
@@ -119,12 +117,24 @@ export default {
       return require("@/assets/google.svg");
     },
     standardAuthActionLink() {
-      return "http://127.0.0.1:3000/users/sign_in";
+      return "https://api.tojung.me/users/sign_in";
     }
   },
   methods: {
     facebookAuth() {
-      alert("페이스북 로그인");
+      // alert("페이스북 로그인");
+      var config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST"
+        }
+      };
+      axios
+        .post("https://api.tojung.me/users/auth/facebook", {}, config)
+        .then(res => {
+          alert(res);
+        });
     },
     googleAuth() {
       alert("구글 로그인");
@@ -153,7 +163,12 @@ export default {
             d.setTime(d.getTime() + cookieExdays * 24 * 60 * 60 * 1000);
             var expires = "expires=" + d.toUTCString();
             document.cookie =
-              cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+              cookieName +
+              "=" +
+              cookieValue +
+              ";" +
+              expires +
+              ";path=/;domain=tojung.me";
           };
           setCookie("token", res.data.token, 1);
           location.href = "/";
