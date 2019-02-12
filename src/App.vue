@@ -14,7 +14,7 @@ import Footer from "@/components/Footer/Footer";
 
 export default {
   components: { Footer, Header },
-  created() {
+  beforeCreate() {
     this.$store.dispatch("SET_USER");
     console.log("host!");
     console.log(this.$apiHost);

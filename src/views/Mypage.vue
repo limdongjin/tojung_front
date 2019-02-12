@@ -144,7 +144,7 @@ export default {
       return require("@/assets/layer.png");
     },
     userImage() {
-      if (this.user.image0 && this.image0.url) return this.user.image0;
+      if (this.user.image0 && this.image0.url) return this.user.image0.url;
       return require("@/assets/default.png");
     }
   },
